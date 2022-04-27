@@ -48,7 +48,7 @@ def test_plot():
 	strain_H1_whitenbp = np.random.uniform(1, 500, 2000)
 	fs = 4000
 	strain_L1_whitenbp = np.random.uniform(1, 500, 2000)
-	ut.plot_det(1, "L1", time, 5000, SNR, template_match, eventname, plottype, tevent,       template_fft, strain_L1_whitenbp, datafreq, d_eff, freqs, data_psd, strain_H1_whitenbp, fs)
+	ut.plot_det(1, "L1", time, 5000, SNR, template_match, eventname, plottype, tevent, template_fft, strain_L1_whitenbp, datafreq, d_eff, freqs, data_psd, strain_H1_whitenbp, fs)
 	plot_path = "figures/" + eventname + "_" + det + "_" + "matchfreq." + plottype
 	assert os.path.exists(plot_path)
 	os.remove(plot_path)
