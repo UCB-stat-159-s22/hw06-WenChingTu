@@ -11,6 +11,7 @@ import matplotlib.mlab as mlab
 from ligotools import readligo as rl
 from os.path import exists
 from os import remove
+import os
 
 def test_whiten():
 	strain_H1, time_H1, chan_dict_H1 = rl.loaddata("data/H-H1_LOSC_4_V2-1126259446-32.hdf5", 'H1')
@@ -30,3 +31,24 @@ def test_write_wavfile():
 	
 def test_reqshift():
 	assert np.sum(ut.reqshift(np.arange(0,100,0.5), 400, 4096)) == -2.4158453015843406e-13
+	
+def test_plot():
+	det = "L1"
+	time = np.arange(1000,5000, 2)
+	SNR = np.arange(1, 5, 0.002)
+	template_match = np.arange(1, 5, 0.002)
+	eventname = "temp"
+	plottype = 'png'
+	tevent = 2502
+	template_fft = np.arange(1020,5020, 2)
+	datafreq = np.arange(1, 5, 0.002)
+	d_eff = 100
+	freqs = np.random.uniform(1, 40, 400)
+	data_psd = np.arange(2000, 4000, 5)
+	strain_H1_whitenbp = np.random.uniform(1, 500, 2000)
+	fs = 4000
+	strain_L1_whitenbp = np.random.uniform(1, 500, 2000)
+	ut.plot_det(1, "L1", time, 5000, SNR, template_match, eventname, plottype, tevent,       template_fft, strain_L1_whitenbp, datafreq, d_eff, freqs, data_psd, strain_H1_whitenbp, fs)
+	plot_path = "figures/" + eventname + "_" + det + "_" + "matchfreq." + plottype
+	assert os.path.exists(plot_path)
+	os.remove(plot_path)
